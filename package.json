@@ -1,7 +1,7 @@
 {
   "name": "zadachki",
   "scripts": {
-    "test": "mocha sort"
+    "test": "mocha */test.js"
   },
   "devDependencies": {
     "mocha": "~8.2.1"

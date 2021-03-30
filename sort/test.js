@@ -4,11 +4,12 @@ const assert = require('assert').strict;
 // const SquareSorter = require('./std-sorter');
 // const LogSorter = require('./std-sorter');
 
-const SquareSorter = require('./FILE_NAME');
-const LogSorter = require('./FILE_NAME');
+// uncomment to test
+// const SquareSorter = require('./FILE_NAME');
+// const LogSorter = require('./FILE_NAME');
 
-testSort('Square', SquareSorter);
-testSort('Log', LogSorter);
+// testSort('Square', SquareSorter);
+// testSort('Log', LogSorter);
 
 function testSort(prefix, Sorter) {
   const noop = () => 0;
