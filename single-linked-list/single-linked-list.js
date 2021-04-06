@@ -1,7 +1,10 @@
 class SingleLinkedList {
-  constructor(head = null) {
-    this.head = new ListNode(head);
+  constructor(...values) {
+    this.head = new ListNode(this.head);
     this.length = 0;
+    for(let value of values){
+      this.insert(value)
+    }
   }
   insert(value, i) {
     let node = new ListNode(value);
@@ -16,7 +19,7 @@ class SingleLinkedList {
         currentNode.next = node;
       }
     } else if (i < 0 || i > this.length) {
-      return "AAAAAAA";
+      throw Error ("AAAAAAA");
     } else if (i === 0) {
       node.next = this.head;
       this.head = node;
@@ -32,20 +35,22 @@ class SingleLinkedList {
     this.length++;
   }
   length() {
+    console.dir(this.length)
     return this.length;
   }
   at(i) {
     let currentNode = this.head;
     if (i < 0 || i > this.length || !isDefined(i)) {
-      return "AAAAAAA";
+      return undefined; //throw Error ("AAAAAAA");
     }
     for (let x = 0; x < i; x++) {
       currentNode = currentNode.next;
     }
-    return currentNode;
+    return currentNode.value;
   }
   remove(i) {
     let currentNode = this.head;
+    let previousNode = null;
     if (!isDefined(i)) {
       if (this.length === 0) {
         this.head = null;
@@ -57,7 +62,7 @@ class SingleLinkedList {
         previousNode.next = null;
       }
     } else if (i < 0 || i > this.length) {
-      return "AAAAAAA";
+      throw Error ("AAAAAAA");
     } else if (i === 0) {
       this.head = currentNode.next;
     } else {
@@ -69,11 +74,45 @@ class SingleLinkedList {
       previousNode.next = currentNode.next;
     }
     this.length--;
+    console.log(currentNode.value);
+    return currentNode.value;
   }
-  map() {}
-  filter() {}
-  reduce() {}
-  sort() {}
+  map(callback) {
+    const newList = new SingleLinkedList();
+    let currentNode = this.head;
+    // let nextNode = currentNode.next;
+    while(currentNode){
+      newList.insert(callback(currentNode.value));
+      currentNode = currentNode.next;
+      // nextNode = currentNode.next;
+    }
+    return newList;
+  }
+  filter(callback) {
+    const newList = new SingleLinkedList();
+    let currentNode = this.head;
+    let nextNode = currentNode.next;
+    while(nextNode !== null){
+      if(callback(currentNode.value, nextNode.value)){
+        newList.insert(currentNode.value);            //mb double-linked
+        newList.insert(nextNode.value);
+      }
+      currentNode = currentNode.next;
+      nextNode = currentNode.next;
+    }
+    return newList;
+  }
+  reduce(callback) {
+    let currentNode = this.head;
+    // let accumulator = 0;
+    let val = 0;
+    while(currentNode){
+      val = callback(val, currentNode.value)  
+      currentNode = currentNode.next;
+    }
+    return val;
+  }
+  sort(callback) {}
 }
 class ListNode {
   constructor(value) {
@@ -86,3 +125,9 @@ const isDefined = (val) =>
   val !== undefined &&
   val !== null &&
   !(typeof value === "number" && isNaN(val));
+
+// const list = new SingleLinkedList(5, 4, 1);
+// list.remove(0)
+// list.remove(1)
+// console.log(list)
+// // console.log(list.remove(2))
