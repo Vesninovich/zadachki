@@ -55,15 +55,15 @@ describe('Single-linked list', () => {
 
   it('Filters', () => {
     const source = new SingleLinkedList(4, 8, 9, 3, 2, 0);
-    const list = source.filter((x, i) => x % 2 && i % 2 === 1);
+    const list = source.filter((x, i) => x % 2 === 0 && i % 2);
     assert.equal(list.length, 2);
-    assert.equal(list.at(1), 8);
-    assert.equal(list.at(5), 0);
+    assert.equal(list.at(0), 8);
+    assert.equal(list.at(1), 0);
   });
 
   it('Reduces', () => {
     const list = new SingleLinkedList(2, 2, 8);
-    assert.equal(list.reduce((sum) => sum + x), 12);
+    assert.equal(list.reduce((sum, x) => sum + x), 12);
     assert.equal(list.reduce((sum, x) => sum + x * 2, 0), 24);
   });
 
