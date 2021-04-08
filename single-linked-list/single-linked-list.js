@@ -80,25 +80,24 @@ class SingleLinkedList {
   map(callback) {
     const newList = new SingleLinkedList();
     let currentNode = this.head;
-    // let nextNode = currentNode.next;
+    let i = 0;
     while(currentNode){
-      newList.insert(callback(currentNode.value));
+      newList.insert(callback(currentNode.value, i));
       currentNode = currentNode.next;
-      // nextNode = currentNode.next;
+      i++
     }
     return newList;
   }
   filter(callback) {
     const newList = new SingleLinkedList();
     let currentNode = this.head;
-    let nextNode = currentNode.next;
-    while(nextNode !== null){
-      if(callback(currentNode.value, nextNode.value)){
+    let i = 0;
+    while(currentNode !== null){
+      if(callback(currentNode.value, i)){
         newList.insert(currentNode.value);            //mb double-linked
-        newList.insert(nextNode.value);
       }
       currentNode = currentNode.next;
-      nextNode = currentNode.next;
+      i++;
     }
     return newList;
   }
@@ -112,7 +111,10 @@ class SingleLinkedList {
     }
     return val;
   }
-  sort(callback) {}
+  sort(callback) {
+    const newList = new SingleLinkedList();
+    
+  }
 }
 class ListNode {
   constructor(value) {
